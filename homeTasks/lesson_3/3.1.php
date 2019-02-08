@@ -1,21 +1,6 @@
 <?php
 
-    $parsedUrl = [
-       "scheme" => "",
-       "host" => "",
-       "port" => "",
-       "user" => "",
-       "pass" => "",
-       "path" => "",
-       "query" => "",
-       "fragment" => "",
-       "domain" => "",
-       "second level domain" => "",
-       "subdomain" => "",
-       "tld" => "",
-       "extension" => "",
-       "parsedQuery" => [],        
-    ];
+
    
     function getUrl()
     {
@@ -38,61 +23,83 @@
 
     function parseUrl(string $url)
     {
+        $parsedUrl = parse_url($url);
+        return $parsedUrl;
+    }
+
+    function getHost($parsedUrl)
+    {
+        $parsedUrl['hostStr'] = explode('.', $parsedUrl['host']);
+        $parsedUrl['tld'] = array_pop($parsedUrl['hostStr']);
+        return $parsedUrl;
+    }
+
+    function getSld($parsedUrl)
+    {
         $subTld = ["com", "co", "org", "in", "us", "gov", "mil", "int", "edu", "net", "biz", "info",];
-      
-        $s = parse_url($url);
-        
-        $hostStr = explode('.', $s['host']);
-        $s["tld"] = array_pop($hostStr);
-        print_r($hostStr);
-        //echo $tld, ' TLD'. PHP_EOL;
-
-        if (in_array(end($hostStr), $subTld, 1) === true) {
-            $s['sld'] = array_pop($hostStr).'.'.$s["tld"];
+        if (in_array(end($parsedUrl['hostStr']), $subTld, 1) === true) {
+            $parsedUrl['sld'] = array_pop($parsedUrl['hostStr']) . '.' . $parsedUrl["tld"];
         }
+        return $parsedUrl;
+    }
 
-        $s['domain'] = isset($s['sld']) === true
-            ? array_pop($hostStr).'.'.$s['sld']
-            : array_pop($hostStr).'.'.$s['tld'];
+    function getDomain($parsedUrl)
+    {
+        $parsedUrl['domain'] = isset($parsedUrl['sld']) === true
+            ? array_pop($parsedUrl['hostStr']) . '.' . $parsedUrl['sld']
+            : array_pop($parsedUrl['hostStr']) . '.' . $parsedUrl['tld'];
+        return $parsedUrl;
+    }
 
+    function getSubDomain($parsedUrl)
+    {
+        $hostStr = $parsedUrl['hostStr'];
         if (empty(implode('.', $hostStr)) === false) {
-            $s['subdomain'] = implode('.', $hostStr);
+            $parsedUrl['subdomain'] = implode('.', $hostStr);
         }
+        return $parsedUrl;
+    }
 
-        if (isset($s['path']) === true && empty(strrchr($s['path'], '.') ) === false) {
-            $ext = strrchr($s['path'], '.');
-            $s['extension'] = substr($ext, 1);
+    function getExtension($parsedUrl)
+    {
+        if (isset($parsedUrl['path']) === true && empty(strrchr($parsedUrl['path'], '.')) === false) {
+            $ext = strrchr($parsedUrl['path'], '.');
+            $parsedUrl['extension'] = substr($ext, 1);
         }
+        return @$parsedUrl;
+    }
 
-        //
-
-        if (isset($s['query']) === true) {
-            parse_str($s['query'], $s['parsedQuery']);
+    function parseQuery($parsedUrl)
+    {
+        if (isset($parsedUrl['query']) === true) {
+            parse_str($parsedUrl['query'], $parsedUrl['parsedQuery']);
         }
+        return $parsedUrl;
+    }
 
-         // echo (parse_str('projectId=236656706&expId=4421&expBranch=1'));
-      /*  foreach ($subTld as $key => $value) {
-            $sld = $subTld[$key] === $hostStr[2]
+    function parse($url)
+    {
+        $parsedUrl = parseQuery(getExtension(getSubDomain(getDomain(getHost($url)))));
+        unset ($parsedUrl['hostStr']);
+        return $parsedUrl;
+
+        //echo
+    }
+
+    function printUrl($parsedUrl)
+    {
+        foreach ($parsedUrl as $k => $v){
+            if ($k === 'parsedQuery') {
+               echo 'Parsed Query:', PHP_EOL;
+                foreach ($parsedUrl['parsedQuery'] as $k => $v){
+                    echo '       ', $k, ' : ', $v, PHP_EOL;
+                }
+                exit;
+            }
+            echo $k, ' : ', $v, PHP_EOL;
         }
-     //     $parsedUrl  
-      //  }
-      // $domain = str_ireplace('www.', '', parse_url($url, PHP_URL_HOST));
-      // $s["domain"] = $domain;
-       //$host = explode('.', $s['host']);
-   //    $subdomains = array_slice($host, 0, count($host) - 2 );
-    //   $s["subdomains"] = $subdomains;
- 
-       var_dump($s);
-       //var_dump(PHP_URL_PORT, 123, PHP_URL_PASS);
-       
-//        $host =*/
-        return $s;
-   }
+    }
 
-   
+    printUrl(parse(parseUrl(getUrl())));
 
-   $ur = getUrl();
-   $paresedUrl1 = parseUrl($ur);
-   echo $ur , " - received URL" , PHP_EOL;
-   print_r($paresedUrl1) . PHP_EOL;
 
