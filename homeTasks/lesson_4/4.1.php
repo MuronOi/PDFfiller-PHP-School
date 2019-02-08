@@ -29,6 +29,9 @@
         
     function printDimond($diagonal)
     {   
+        if ($diagonal === 1) {
+            exit('*').PHP_EOL;
+        }
         $stars = $spaces = intdiv($diagonal, 2) + 1;
     
         for ($i = 1; $i <= $stars; $i++) {
