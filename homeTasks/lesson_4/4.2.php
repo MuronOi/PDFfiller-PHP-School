@@ -3,58 +3,68 @@
     function getParam()
     {
         global $argv;
-             
-        
-       
-        //$params = $argv[1], $argv[2];//isset($argv[2])  
-          //  ? $argv[1], $argv[2]
-            //: $argv[1];
-            //  return $params;        
+        $params = isset($argv[2])
+              ? [$argv[1], $argv[2]]
+              : [$argv[1], 'bot'];
+        return $params;
     }       
     
-    function checkingParams($params)
+    function checkingParams(array $params)
     {
-                  
-    } 
-        
-    $param = getParam();
-    var_export ($param);
-    
-    $l = 3;     
-    $snake = [];
-
-    $goDown = true;
-    $c = 1;
-    for ($i = 0; $i < $l; $i++) {
-        if ($goDown) {
-            for ($j = 0; $j < $l; $j++) {
-                $snake [$i][$j] = $c;
-                $c++;
-            }
-            $goDown = false;
+        if (is_int(((int) $params[0])) && (int)$params[0] >= 1 && (is_string($params[1])
+                && ($params[1] === 'bot' || $params[1] === 'top'))=== true) {
+            return true;
         } else {
-              for ($j = $l - 1; $j >= 0; $j--){
-                  $snake [$i][$j] = $c;
-                  $c++;
-              }
-              $goDown = true;  
-          }
-          
+            exit('Input format is 4.2.php <side_length> <direction>'.PHP_EOL
+                 .'The $n must be a natural unpaired number'. PHP_EOL
+                 .'<direction> could be "bot" or "top". Default value is "bot"'.PHP_EOL);
+        }
+    } 
+
+    function fillArray(int $l)
+    {
+        $snake = [];
+        $upToDown = true;
+        $c = 1;
+        for ($i = 0; $i < $l; $i++) {
+            if ($upToDown) {
+                for ($j = 0; $j < $l; $j++) {
+                    $snake [$i][$j] = $c;
+                    $c++;
+                }
+                $upToDown = false;
+            } else {
+                for ($j = $l - 1; $j >= 0; $j--){
+                    $snake [$i][$j] = $c;
+                    $c++;
+                }
+                $upToDown = true;
+            }
+        }
+        return $snake;
     }
-    $option = 'bot';
-    for ($i = 0; $i < $l; $i++) {
-         for ($j = 0; $j < $l; $j++) {
-                if ($option === 'bot') { 
+
+    function printSnake(array $snake, int $l, string $option)
+    {
+        for ($i = 0; $i < $l; $i++) {
+            for ($j = 0; $j < $l; $j++) {
+                if ($option === 'bot') {
                     echo $snake[$j][$i], ' ';
                 } else {
-                      echo $snake[$i][$j], ' ';
-                  }
-         }
-         echo PHP_EOL;
+                    echo $snake[$i][$j], ' ';
+                }
+            }
+            echo PHP_EOL;
+        }
     }
 
-   // print_r($snake);
-      
-    //var_export ($snake);
+    $param = getParam();
+    $l = $param[0];
+    $option = $param[1];
 
+    if (checkingParams($param) === true){
+        $snake = fillArray($l);
+        printSnake($snake, $l, $option);
+
+    }
 
