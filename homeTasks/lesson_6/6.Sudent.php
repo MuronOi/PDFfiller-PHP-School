@@ -107,7 +107,7 @@ class Student
 
     public function showMyself()
     {
-        echo 'Student ', $this->firstname, ' ', $this->lastname, ', have gender ', $this->gender, PHP_EOL;
+        echo 'Student ', $this->firstname, ' ', $this->lastname, ', have a gender - ', $this->gender, PHP_EOL;
         echo 'Student\'s status - ', $this->status, PHP_EOL;
         echo 'Student\'s GPA is ', $this->gpa, PHP_EOL;
     }
@@ -127,7 +127,26 @@ class Student
 
 }
 
+$studentsList = [
+    $first = ['Mike', 'Barnes', 'male', 'freshman', 4],
+    $second = ['Jim', 'Nickerson', 'male', 'sophomore', 3],
+    $third = ['Jack', 'Indabox', 'male', 'junior', 2.5],
+    $fourth = ['Jane', 'Miller', 'female', 'senior', 3.6],
+    $fifth = ['Mary', 'Scott', 'female', 'senior', 2.7],
+];
 
-$student = new Student('Oleg', 'LLolo', 'asdasd', 'freshman', 1);
-$student->studyTime(1000);
-$student->showMyself();
+$student = [];
+
+for ($i = 0; $i < count($studentsList); $i++  ) {
+    $student[$i] = new Student(($studentsList[$i][0]),
+                           ($studentsList[$i][1]),
+                           ($studentsList[$i][2]),
+                           ($studentsList[$i][3]),
+                           ($studentsList[$i][4]));
+}
+
+foreach ($student as $key => $value) {
+    $value->showMyself();
+    echo PHP_EOL;
+}
+
