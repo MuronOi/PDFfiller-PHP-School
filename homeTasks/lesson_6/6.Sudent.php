@@ -1,25 +1,5 @@
 <?php
 
-//Define a student class. A student has the following attributes: `firstname`, `lastname`, `gender` which can be "male"
-// or "female", `status` which can be equal to "freshman", "sophomore", "junior", and "senior" and "gpa".
-//
-//Then define the following methods for the student class.
-//
-//The `showMyself` method will simply print all the attribute variables when called upon the object.
-// This method has no input arguments.
-//The `studyTime` method will increment the gpa of the student according to the following formula: `
-// gpa = gpa + log(study_time)`.
-// The only input argument of this method is the variable study_time. In addition make sure that the gpa
-// variable never exceeds 4.0 even if the student studies for a very long time.
-//
-//Now define 5 student objects and store the objects in an array called studentList. The five students are: Mike Barnes,
-// Jim Nickerson, Jack Indabox, Jane Miller and Mary Scott. Mike is a freshman, Jim a sophomore, Jack a junior,
-// Jane and Mary are seniors. Their respective GPAs are: 4, 3, 2.5, 3.6 and 2.7.
-// Make sure you assign the gender when you instantiate the objects.
-//
-//Then call the showMyself method on all of them.
-// I suggest you use a loop for making the objects and a separate loop for showing the objects.
-
 //Use your objects from above and let each one of the 5 students study for 60, 100, 40, 300, 1000 minutes, respectively.
 // So the first student studies 60 minutes, the second studies 100 minutes, etc. After that call the showMyself methods
 // on all 5 again and check whether their new gpa reflects how much they studied.
@@ -109,7 +89,7 @@ class Student
     {
         echo 'Student ', $this->firstname, ' ', $this->lastname, ', have a gender - ', $this->gender, PHP_EOL;
         echo 'Student\'s status - ', $this->status, PHP_EOL;
-        echo 'Student\'s GPA is ', $this->gpa, PHP_EOL;
+        echo 'Student\'s GPA is ',  number_format($this->gpa,2), PHP_EOL;
     }
 
     /**
@@ -120,11 +100,7 @@ class Student
         $this->gpa = ($this->gpa + log($study_time/60)) > 4.0
             ? 4.0
             : round(($this->gpa + log($study_time/60)),2 );
-        var_dump($this->gpa).PHP_EOL;
     }
-
-
-
 }
 
 $studentsList = [
@@ -150,3 +126,13 @@ foreach ($student as $key => $value) {
     echo PHP_EOL;
 }
 
+$stadyMinutes = [60, 100, 40, 300, 1000];
+for ($i = 0; $i < count($studentsList); $i++  ) {
+    $student[$i]->studyTime($stadyMinutes[$i]);
+}
+
+echo 'Updated results:', PHP_EOL;
+foreach ($student as $key => $value) {
+    $value->showMyself();
+    echo PHP_EOL;
+}
