@@ -6,10 +6,12 @@ class Queue extends Structure
 {
     private $head = 0;
     private $tail = 0;
+    private $count =0;
 
     public function in($value)
     {
         $this->hranilishche[$this->tail++] = $value;
+        $this->count++;
     }
 
     public function isEmpty() {
@@ -26,15 +28,20 @@ class Queue extends Structure
         if($this->head > $this->tail) {
             $this->head = $this->tail = 0;
         }
+        $this->count--;
         return $res;
+    }
+    public function size ()
+    {
+        return $this->count;
     }
 }
 
-$obj = new Queue();
-// /// //
-$obj->in(5);
-$obj->in(5);
-$obj->in(5);
-$obj->in(5);
-$text = serialize($obj);
-file_put_contents('test.txt', $text);
+//$obj = new Queue();
+//// /// //
+//$obj->in(5);
+//$obj->in(5);
+//$obj->in(5);
+//$obj->in(5);
+//$text = serialize($obj);
+//file_put_contents('test.txt', $text);

@@ -35,15 +35,12 @@ class Stack extends Structure
 }
 
 //$obj = new Stack();
-////var_dump($obj->isEmpty());
-//for($i = 0; $i< 10; $i++) {
+//
+//for ($i = 0; $i < 10; $i++) {
 //    $obj->in($i.'abc');
 //}
-////var_dump($obj->isEmpty());
-//var_dump($obj->last());
-////var_dump($obj->out());
-////var_dump($obj->out());
-////var_dump($obj->out());
-////var_dump($obj->out());
-////var_dump($obj->out());
-////var_dump($obj->out());
+//var_dump($obj);
+//
+//for ($i = 0; $i < 10; $i++) {
+//    echo $obj->out(), PHP_EOL;
+//}

@@ -7,8 +7,6 @@ class QueueDoubleStack extends Structure
 {
     private $inStack;
     private $outStack;
-//    private $head = 0;
-//    private $tail = 0;
 
     /**
      * QueueDoubleStack constructor.
@@ -25,7 +23,7 @@ class QueueDoubleStack extends Structure
     }
 
     public function isEmpty() {
-        return ($this->inStack->isEmpty() || $this->outStack->isEmpty()) === 0;
+        return ($this->inStack->isEmpty() && $this->outStack->isEmpty()) === true;
     }
 
     public function out()
@@ -42,13 +40,17 @@ class QueueDoubleStack extends Structure
     }
 }
 
-//$obj = new QueueDoubleStack();
 $obj = new QueueDoubleStack();
+
 for ($i = 0; $i < 10; $i++) {
     $obj->in($i.'abc');
 }
+
+var_dump($obj->isEmpty());
+
 for ($i = 0; $i < 10; $i++) {
     echo $obj->out(), PHP_EOL;
 }
-//$obj->in(123465);
-//var_dump($obj);
+
+var_dump($obj->isEmpty());
+
