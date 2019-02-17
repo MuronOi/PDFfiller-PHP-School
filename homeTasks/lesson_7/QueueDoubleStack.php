@@ -7,8 +7,8 @@ class QueueDoubleStack extends Structure
 {
     private $inStack;
     private $outStack;
-    private $head = 0;
-    private $tail = 0;
+//    private $head = 0;
+//    private $tail = 0;
 
     /**
      * QueueDoubleStack constructor.
@@ -22,11 +22,10 @@ class QueueDoubleStack extends Structure
     public function in($value)
     {
         $this->inStack->in($value);
-        $this->tail++;
     }
 
     public function isEmpty() {
-        return $this->head === $this->tail;
+        return ($this->inStack->isEmpty() || $this->outStack->isEmpty()) === 0;
     }
 
     public function out()
