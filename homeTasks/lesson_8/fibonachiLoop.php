@@ -1,7 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: muronoi
- * Date: 23.02.19
- * Time: 17:38
- */
+
+function fibonachiLoop($value){
+    $fr = $sc = 1;
+
+    for ($i = 2; $i <= $value; $i++){
+        $sc += $fr;
+        $fr = $sc - $fr;
+    }
+    return $sc;
+
+}
+
+echo fibonachiLoop(10), PHP_EOL;

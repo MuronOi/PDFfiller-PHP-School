@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: muronoi
- * Date: 22.02.19
- * Time: 19:06
- */
+
+$linkedList = new LinkedList();
+
+$linkedList->setValue1("new element 1");
