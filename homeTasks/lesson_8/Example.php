@@ -2,4 +2,4 @@
 
 $linkedList = new LinkedList();
 
-$linkedList->setValue1("new element 1");
+$linkedList->setValue("new element 1");

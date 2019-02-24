@@ -2,9 +2,23 @@
 
 class SeparateNode
 {
-    private $value1;
+    private $value;
     private $next;
     private $previous;
+
+    /**
+     * SeparateNode constructor.
+     * @param $value
+     * @param $next
+     * @param $previous
+     */
+    public function __construct($value, $next, $previous)
+    {
+        $this->value = $value;
+        $this->next = $next;
+        $this->previous = $previous;
+    }
+
 
     /**
      * @return mixed
@@ -41,17 +55,17 @@ class SeparateNode
     /**
      * @return mixed
      */
-    public function getValue1()
+    public function getValue()
     {
-        return $this->value1;
+        return $this->value;
     }
 
     /**
-     * @param mixed $value1
+     * @param mixed $value
      */
-    public function setValue1($value1): void
+    public function setValue($value): void
     {
-        $this->value1 = $value1;
+        $this->value = $value;
     }
 
 
