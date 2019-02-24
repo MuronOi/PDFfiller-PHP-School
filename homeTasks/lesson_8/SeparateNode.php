@@ -12,12 +12,12 @@ class SeparateNode
      * @param $next
      * @param $previous
      */
-    public function __construct($value, $next, $previous)
-    {
-        $this->value = $value;
-        $this->next = $next;
-        $this->previous = $previous;
-    }
+//    public function __construct($value, $next, $previous)
+//    {
+//        $this->value = $value;
+//        $this->next = $next;
+//        $this->previous = $previous;
+//    }
 
 
     /**
