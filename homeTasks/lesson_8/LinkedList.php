@@ -7,21 +7,10 @@ class LinkedList extends SeparateNode
     private $head = null;
     private $tail = null;
 
-//    public function __construct($value)
-//    {
-//        if (empty($this->head)){
-//            $newElement = new SeparateNode($value, null, null);
-//            $this->head = $newElement;
-//            $this->tail = $newElement;
-//        }
-//    }
-
-
     public function append($value)
     {
         $newElement = new SeparateNode();
         $newElement->setValue($value);
-
         if (empty($this->head)){
             $newElement->setNext(null);
             $newElement->setPrevious(null);
@@ -48,8 +37,9 @@ class LinkedList extends SeparateNode
     {
         if (empty($this->head)) {
             throw new RuntimeException('List is empty');
+        } else {
+            $this->head = $this->head->getNext();
         }
-        $this->head = $this->head->getNext();
     }
 
     public function deleteFromEnd()
@@ -77,7 +67,7 @@ class LinkedList extends SeparateNode
             $newElement->setNext($elementAt->getNext());
         }
         $elementAt->setNext($newElement);
-    } //
+    }
     public function insertBeforeAt($value, $at)
     {
         $newElement = new SeparateNode();
@@ -95,7 +85,7 @@ class LinkedList extends SeparateNode
             $newElement->setNext($elementAt);
             $elementAt->setPrevius($newElement);
         }
-    } //
+    }
     public function deleteAt($at)
     {
         $deletingElement = $this->search($at);
@@ -140,26 +130,6 @@ class LinkedList extends SeparateNode
 
 }
 
-$obj = new LinkedList();
-$obj->append(2);
-$obj->append(3);
-$obj->append(4);
-$obj->append(5);
-$obj->append(6);
-$obj->append(7);
-
-echo $obj->__toString(), PHP_EOL;
-$obj->insertAfterAt('26', 3);
-echo $obj->__toString(), PHP_EOL;
-
-$obj->deleteFromEnd();
-echo $obj->__toString(), PHP_EOL;
-
-$obj->deleteFromHead();
-echo $obj->__toString(), PHP_EOL;
-
-$obj->deleteAt('26');
-echo $obj->__toString(), PHP_EOL;
 
 
 

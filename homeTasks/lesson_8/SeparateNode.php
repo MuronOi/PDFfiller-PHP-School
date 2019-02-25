@@ -7,20 +7,6 @@ class SeparateNode
     private $previous;
 
     /**
-     * SeparateNode constructor.
-     * @param $value
-     * @param $next
-     * @param $previous
-     */
-//    public function __construct($value, $next, $previous)
-//    {
-//        $this->value = $value;
-//        $this->next = $next;
-//        $this->previous = $previous;
-//    }
-
-
-    /**
      * @return mixed
      */
     public function getNext()
