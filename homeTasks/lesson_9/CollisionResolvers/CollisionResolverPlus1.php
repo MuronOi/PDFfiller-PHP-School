@@ -1,10 +1,10 @@
 <?php
 
-require_once __DIR__ . '/ResolverInterface.php';
+require_once __DIR__.'/CollisionResolverInterface.php';
 
 class ResolveCollisionsPlus1 implements ResolverInterface
 {
-    public function resolve($index, $hranilishche, $size)
+    public function resolveIn($index, $hranilishche, $size)
     {
         $flag = false;
         for ($j = $index + 1; ; $j++) {
@@ -17,9 +17,27 @@ class ResolveCollisionsPlus1 implements ResolverInterface
                 $flag = true;
             }
 
-            if (
-                isset($hranilishche[$j])
-                && !empty($hranilishche[$j])) {
+            if (isset($hranilishche[$j]) && !empty($hranilishche[$j])) {
+                continue;
+            } else {
+                return $j;
+            }
+        }
+    }
+    public function resolveOut($index, $hranilishche, $size, $value)
+    {
+        $flag = false;
+        for ($j = $index + 1; ; $j++) {
+            if ($j >= $size) {
+                if ($flag) {
+                    throw Exception('Our table is full');
+                }
+
+                $j = 0;
+                $flag = true;
+            }
+
+            if($hranilishche[$j] !== $value){
                 continue;
             } else {
                 return $j;

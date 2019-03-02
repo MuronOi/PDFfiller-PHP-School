@@ -24,10 +24,19 @@ class HashTable
 
     public function write($index, $value) {
         if(isset($this->storage[$index]) && !empty($this->storage[$index])) {
-            $newIndex = $this->collisionResolver->resolve($index, $this->storage, $this->hashTableMaxLength);
+            $newIndex = $this->collisionResolver->resolveIn($index, $this->storage, $this->hashTableMaxLength);
             $this->storage[$newIndex] = $value;
         } else {
             $this->storage[$index] = $value;
+        }
+    }
+
+    public function get($index, $value){
+        if($this->storage[$index] === $value) {
+            return $this->storage[$index];
+        } else {
+            $newIndex = $this->collisionResolver->resolveOut($index, $this->storage, $this->hashTableMaxLength, $value);
+            return $this->storage[$newIndex];
         }
     }
 }

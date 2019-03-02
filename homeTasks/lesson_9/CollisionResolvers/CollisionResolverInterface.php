@@ -2,5 +2,6 @@
 
 interface ResolverInterface
 {
-    public function resolve($index, $hranilishche, $size);
+    public function resolveIn($index, $hranilishche, $size);
+    public function resolveOut($index, $hranilishche, $size, $value);
 }
