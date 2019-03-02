@@ -4,7 +4,7 @@ require_once __DIR__.'/CollisionResolverInterface.php';
 
 class ResolveCollisionsPlus1 implements ResolverInterface
 {
-    public function resolveIn($index, $hranilishche, $size)
+    public function resolveIn($index, $value, &$hranilishche, $size)
     {
         $flag = false;
         for ($j = $index + 1; ; $j++) {
@@ -20,11 +20,12 @@ class ResolveCollisionsPlus1 implements ResolverInterface
             if (isset($hranilishche[$j]) && !empty($hranilishche[$j])) {
                 continue;
             } else {
-                return $j;
+                $hranilishche[$j] = $value;
+                break;
             }
         }
     }
-    public function resolveOut($index, $hranilishche, $size, $value)
+    public function resolveOut($index, $value, &$hranilishche, $size)
     {
         $flag = false;
         for ($j = $index + 1; ; $j++) {
@@ -40,7 +41,7 @@ class ResolveCollisionsPlus1 implements ResolverInterface
             if($hranilishche[$j] !== $value){
                 continue;
             } else {
-                return $j;
+                return $hranilishche[$j];
             }
         }
     }

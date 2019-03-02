@@ -24,8 +24,8 @@ class HashTable
 
     public function write($index, $value) {
         if(isset($this->storage[$index]) && !empty($this->storage[$index])) {
-            $newIndex = $this->collisionResolver->resolveIn($index, $this->storage, $this->hashTableMaxLength);
-            $this->storage[$newIndex] = $value;
+            $this->collisionResolver->resolveIn($index, $value, $this->storage, $this->hashTableMaxLength);
+
         } else {
             $this->storage[$index] = $value;
         }
@@ -35,8 +35,7 @@ class HashTable
         if($this->storage[$index] === $value) {
             return $this->storage[$index];
         } else {
-            $newIndex = $this->collisionResolver->resolveOut($index, $this->storage, $this->hashTableMaxLength, $value);
-            return $this->storage[$newIndex];
+            return $this->collisionResolver->resolveOut($index, $value, $this->storage, $this->hashTableMaxLength);            ;
         }
     }
 }
