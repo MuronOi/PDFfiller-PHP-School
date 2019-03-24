@@ -1,5 +1,9 @@
 <?php
 
+use App\Car;
+use App\Catalogue;
+use App\Truck;
+
 require_once __DIR__.'/src/Car.php';
 require_once __DIR__.'/src/Truck.php';
 require_once __DIR__.'/src/Catalogue.php';
