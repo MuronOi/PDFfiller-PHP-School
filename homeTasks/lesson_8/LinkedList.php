@@ -2,11 +2,23 @@
 
 require_once __DIR__.'/SeparateNode.php';
 
+/**
+ * Class LinkedList
+ */
 class LinkedList extends SeparateNode
 {
+    /**
+     * @var null
+     */
     private $head = null;
+    /**
+     * @var null
+     */
     private $tail = null;
 
+    /**
+     * @param $value
+     */
     public function append($value)
     {
         $newElement = new SeparateNode();
@@ -25,6 +37,9 @@ class LinkedList extends SeparateNode
         }
     }
 
+    /**
+     * @param $value
+     */
     public function prepend($value)
     {
         $headObj = $this->head;
@@ -33,6 +48,9 @@ class LinkedList extends SeparateNode
         $this->head = $obj;
     }
 
+    /**
+     *
+     */
     public function deleteFromHead()
     {
         if (empty($this->head)) {
@@ -42,6 +60,9 @@ class LinkedList extends SeparateNode
         }
     }
 
+    /**
+     *
+     */
     public function deleteFromEnd()
     {
         if (!empty($this->head)) {
@@ -51,6 +72,11 @@ class LinkedList extends SeparateNode
             throw new RuntimeException('List is empty');
         }
     }
+
+    /**
+     * @param $value
+     * @param $at
+     */
     public function insertAfterAt($value, $at)
     {
         $newElement = new SeparateNode();
@@ -68,6 +94,11 @@ class LinkedList extends SeparateNode
         }
         $elementAt->setNext($newElement);
     }
+
+    /**
+     * @param $value
+     * @param $at
+     */
     public function insertBeforeAt($value, $at)
     {
         $newElement = new SeparateNode();
@@ -86,6 +117,10 @@ class LinkedList extends SeparateNode
             $elementAt->setPrevius($newElement);
         }
     }
+
+    /**
+     * @param $at
+     */
     public function deleteAt($at)
     {
         $deletingElement = $this->search($at);
@@ -101,21 +136,40 @@ class LinkedList extends SeparateNode
         $prevElement->setNext($nextElement);
         $nextElement->setPrevious($prevElement);
     }
+
+    /**
+     * @param $at
+     * @return |null
+     */
     public function search($at)
     {
-        if (empty($this->head)){
-            throw new RuntimeException('List is empty');
-        }
-        $start = $this->head;
-        while ($start !== $this->tail){
-            if ($start->getValue() === $at) {
-                return $start;
-            }
-            $start = $start->getNext();
-        }
+//        if (empty($this->head)){
+//            throw new RuntimeException('List is empty');
+//        }
+//        $start = $this->head;
+//        while ($start !== $this->tail){
+//            if (strcmp($start->getValue(), $at) == 0) {
+//                return $start;
+//            }
+//            $start = $start->getNext();
+//        }
 
+        $item = $this->head;
+        for ($i = 0; ;$i++) {
+            if ($item->getValue() === $at) {
+                return $item;
+            }
+            if ($item->getNext() === null) {
+                break;
+            }
+            $item = $item->getNext();
+        }
+        return null;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString()
     {
         $start = $this->head;

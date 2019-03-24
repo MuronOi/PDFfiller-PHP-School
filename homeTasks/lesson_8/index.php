@@ -20,5 +20,5 @@ echo $obj->__toString(), PHP_EOL;
 $obj->deleteFromHead();
 echo $obj->__toString(), PHP_EOL;
 
-$obj->deleteAt('26');
+$obj->deleteAt(4);
 echo $obj->__toString(), PHP_EOL;

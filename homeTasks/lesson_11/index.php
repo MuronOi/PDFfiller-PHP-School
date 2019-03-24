@@ -1,12 +1,10 @@
 <?php
 
-use App\Car;
-use App\Catalogue;
-use App\Truck;
+require_once  __DIR__.'/vendor/autoload.php';
 
-require_once __DIR__.'/src/Car.php';
-require_once __DIR__.'/src/Truck.php';
-require_once __DIR__.'/src/Catalogue.php';
+use App\Catalogue;
+use App\Car;
+use App\Truck;
 
 $cars = [
     ['Opel', 1999, 'Astra', '3D7KS29D67G713596', 'Full'],

@@ -1,8 +1,6 @@
 <?php
 
 namespace App;
-require_once __DIR__.'/Vehicle.php';
-//use App\Vehicle;
 
 class Car extends Vehicle
 {

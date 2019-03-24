@@ -1,8 +1,5 @@
 <?php
 namespace App;
-require_once __DIR__.'/Vehicle.php';
-
-//use App\Vehicle;
 class Truck extends Vehicle
 {
     private $carryingCapacity;

@@ -55,14 +55,32 @@ class StackDoubleQueue extends Structure
 
 $obj = new StackDoubleQueue();
 
-for ($i = 0; $i < 10; $i++) {
-    $obj->in($i.'abc');
-}
-var_export($obj);
-var_dump($obj->isEmpty());
+//for ($i = 0; $i < 10; $i++) {
+//    $obj->in($i.'abc');
+//}
+//var_export($obj);
+//var_dump($obj->isEmpty());
+//
+//for ($i = 0; $i < 10; $i++) {
+//    echo $obj->out(), PHP_EOL;
+//}
+//
+//var_dump($obj->isEmpty());
 
-for ($i = 0; $i < 10; $i++) {
-    echo $obj->out(), PHP_EOL;
+$line =  '"(<{}>)"';
+
+function eyeOfSauron ($line) {
+    $line1 = new StackDoubleQueue();
+  //  $line2 = new StackDoubleQueue();
+    $lineStr = str_split($line);
+    for ($i = 0; $i < count($lineStr); $i++) {
+        $line1->in($lineStr[$i]);
+    }
+    $line2 = '';
+    for ($i = 0; $i < count($lineStr); $i++) {
+        $line2 .= $line1->out();
+    }
+    echo $line2, PHP_EOL;
 }
 
-var_dump($obj->isEmpty());
+eyeOfSauron($line);

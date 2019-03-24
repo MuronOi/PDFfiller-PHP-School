@@ -5,7 +5,7 @@ class SingleLeaf
     private $value;
     private $left = null;
     private $right = null;
-    private $top = null;
+ //   private $top = null;
 
     /**
      * SingleLeaf constructor.

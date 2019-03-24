@@ -8,25 +8,13 @@ class BinaryTree extends SingleLeaf
 
     /**
      * BinaryTree constructor.
-     * @param null $root
+     * @param $value
      */
     public function __construct($value)
     {
         $leaf = new SingleLeaf($value);
-        $leaf->setTop(null);
+//        $leaf->setTop(null);
         $this->root = $leaf;
-
-    }
-
-    public function append($value){
-        $newLeaf = new SingleLeaf();
-        $newLeaf->setValue($value);
-
-//        if (empty($this->root)){
-//            $this->root = $newLeaf;
-//        } elseif () {
-//
-//        }
     }
 
     public function isEmpty ()
@@ -34,33 +22,39 @@ class BinaryTree extends SingleLeaf
         return is_null($this->root);
     }
 
-    public function insert ($value)
+    public function append ($value)
     {
-        $leaf = new SingleLeaf($value);
-        $this->insertNode($leaf, $this->root);
-    }
-
-    protected function insertNode (SingleLeaf $node, $subtree)
-    {
-        if (is_null($subtree)) {
-            $subtree = $node;
+        if ($this->root == null) {
+            $this->root = new SingleLeaf($value);
         } else {
-            if ( is_null($subtree->getLeft())){
-                $this->insertNode($node, $subtree->getLeft());
-                $subtree->setLeft($node);
-            } elseif (is_null($subtree->getRight())) {
-                $this->insertNode($node, $subtree->getRight());
-                $subtree->setRight($node);
+            $subtree = $this->root;
+            while (true) {
+                if ($subtree->getLeft()) {
+                    $subtree = $subtree->getLeft();
+                } else {
+                    $subtree->setLeft(new SingleLeaf($value));
+                    break;
+                }
+                if ($subtree->getRight()) {
+                    $subtree = $subtree->getRight();
+                } else {
+                    $subtree->setRight(new SingleLeaf($value));
+                    break;
+                }
+
             }
         }
-        return $this;
+
     }
 }
 
 $obj = new BinaryTree(1);
-$obj->insert(2);
-$obj->insert(3);
-$obj->insert(4);
+$obj->append(2);
+$obj->append(3);
+$obj->append(4);
+$obj->append(5);
+$obj->append(7);
+
 
 
 var_export($obj);
